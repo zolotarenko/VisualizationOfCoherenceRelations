@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <link href='https://fonts.googleapis.com/css?family=Lato:300,900' rel='stylesheet' type='text/css'>
+
+    <style>
+     body{
+        background-color: whitesmoke;
+     }
+
+     svg {
+        background-color: white;
+        font-family: sans-serif;
+     }
+
+    .annotation-note-title, text.title {
+      font-weight: bold;
+    }
+
+    text.title {
+      font-size: 1.2em;
+    }
+
+    </style>
+    <title></title>
+</head>
+<body>
+    <!--Make text into svg-->
+    <!--<svg width=960 height=500>-->
+    <!--<text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="20px"> blablabla. The snow was heavy. But we kept going. Until the sun came back. more blabla. </text>-->
+    <!--</svg>-->
+    <!--<svg width=960 height=500>-->
+      <!--<text class="title" x=40 y=50>d3.annotation()</text>-->
+      <!--<text x=40 y=80>Basic examples without scales</text>-->
+    <!--</svg>-->
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <script src="https://rawgit.com/susielu/d3-annotation/master/d3-annotation.min.js"></script>
+    <script>
+
+        var pos = [
+           { "cx": "50%", "cy": "50%"}];
+
+         //Create the SVG Viewport
+         var svgContainer = d3.select("body").append("svg")
+                                               .attr("width",960)
+                                              .attr("height", 500);
+                                              // .attr("width","1500px")
+                                              //  .attr("width","100%")
+
+                                              // .attr("height","100%");
+
+
+        //Add the SVG Text Element to the svgContainer
+        var text = svgContainer.selectAll("text")
+                                .data(pos)
+                                .enter()
+                                .append("text");
+
+        //Add SVG Text Element Attributes
+        var textLabels = text
+                         .attr("x", function(d) { return d.cx; })
+                         .attr("y", function(d) { return d.cy; })
+                         .text( function (d) { return "The snow was heavy. But we kept going. Until the sun came back."; })
+                         .attr("font-family", "sans-serif")
+                         .attr("font-size", "20pt")
+                         .attr("text-anchor", "middle")
+                         .attr("fill", "black");
+
+
+        // Get coordinates of the text: x, y, width, height, top, right, bottom, left
+        var coords = {};
+        let elem = document.querySelector('text');
+        let rect = elem.getBoundingClientRect();
+        // var s = new XMLSerializer();
+        // var str = s.serializeToString(elem);
+        // var sub = rect.getComputedTextLength();
+        for (var key in rect) {
+          if(typeof rect[key] !== 'function') {
+            let para = document.createElement('p');
+            coords[key] = rect[key];
+            para.textContent  = `${ key } : ${ rect[key] }`;
+            // ---> Display output on the page
+            // document.body.appendChild(para);
+          }
+        }
+
+        var text1 = "The snow was heavy.";
+        var text2 = "But we kept going.";
+        var text3 = "Until the sun came back.";
+
+        var content = elem.textContent;
+        var arg1 = content.search(text1);
+        var arg2 = content.search(text2);
+
+        function get_tex_size(txt, font) {
+            this.element = document.createElement('canvas');
+            this.context = this.element.getContext("2d");
+            this.context.font = font;
+            return {'width':this.context.measureText(txt).width, 'height':parseInt(this.context.font)};
+        }
+
+        var t_width_1 = get_tex_size(text1, "20pt sans-serif");
+        var t_width_2 = get_tex_size(text2, "20pt sans-serif");
+
+        var start1 = elem.getStartPositionOfChar(arg1);
+        var start2 = elem.getStartPositionOfChar(arg2);
+
+        // Clatulate location of the substring in the svg text
+        function locate_subtext(subtext){
+            var location = content.search(subtext);
+            return {start: elem.getStartPositionOfChar(location).x, width: get_tex_size(subtext,"20pt sans-serif").width}
+
+        }
+
+        // Construct annotation here
+        const annotations = [
+        {
+          type: d3.annotationCalloutRect,
+          note: {
+            title: "Arg1",
+          },
+            subject: {
+              width: locate_subtext(text1).width,
+              height: coords.height+15
+          },
+            x: locate_subtext(text1).start,
+            y: coords.y-15,
+            dy: -0.1,
+            dx: locate_subtext(text1).width/2
+        },
+        {
+          type: d3.annotationCalloutRect,
+          note: {
+            title: "Arg2",
+          },
+            subject: {
+              width: locate_subtext(text2).width,
+                height: coords.height+15
+          },
+            x: locate_subtext(text2).start,
+            y: coords.y-15,
+            dy: -0.1,
+            dx: locate_subtext(text2).width/2
+        },
+
+        {type: d3.annotationCalloutElbow,
+        note: {
+        title: "REL1 ",
+        },
+        y: coords.y-15,
+        x: locate_subtext(text1).start+100,
+        dy: -37,
+        dx: locate_subtext(text1).width/2
+        },
+
+        {
+        type: d3.annotationCalloutElbow,
+        note: {
+        title: "",
+        },
+        y: coords.y-15,
+        x: locate_subtext(text2).start+100,
+        dy: -37,
+        dx: -locate_subtext(text2).width/2
+        }
+
+//     {type: d3.annotationXYThreshold,
+//         note: {
+//         title: "REL1"
+//         },
+//         x: t_width_1.width,
+//         y: coords.y-50,
+//         dy: -0.1,
+//         dx: 50,
+//         subject: {
+//         x1: t_width_1.width/2,
+//         x2: t_width_1.width+t_width_2.width+50
+//     }
+// }
+      ].map(function(d){ d.color = "#7fb3e8"; return d});
+
+        //
+        // const calloutWithArrow =
+        //   d3.annotationCustomType(
+        //     d3.annotationCalloutElbow,
+        //     { connector: { end: "arrow" }}
+        //   );
+        //
+        // d3.annotation()
+        //   .type(calloutWithArrow)
+        //   .annotations([{
+        //     text: "Plant paradise",
+        //     data: { date: "18-Sep-09", close: 185.02 },
+        //     dy: 37,
+        //     dx: 42
+        //   }])
+        //   .editMode(true);
+
+        const makeAnnotations = d3.annotation()
+          .type(d3.annotationLabel)
+            // .editMode(true)
+            .notePadding(15)
+          .annotations(annotations);
+
+        d3.select("svg")
+          .append("g")
+          .attr("class", "annotation-group")
+          .call(makeAnnotations)
+
+    </script>
+</body>
+</html>
