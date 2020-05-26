@@ -81,7 +81,7 @@ h1 {
       <h2>Types</h2>
         <label>
             <!--<script type="javascript"> document.getElementById("one").innerHTML = types[0]; </script>-->
-            <input id="explicit" class="container" type="checkbox" onclick="myFunction2(this.parentNode.id)"> </input>
+            <input id="explicit" class="container" type="checkbox" onclick="checked(this.parentNode.id)"> </input>
             <span class="checkmark">Explicit</span>
         </label>
         <p> </p>
@@ -99,7 +99,7 @@ h1 {
         </label>
         <p> </p>
         <label>
-            <input id="contingency" class="container" type="checkbox" onclick="myFunction2(id)"> </input>
+            <input id="contingency" class="container" type="checkbox" onclick="checked(id)"> </input>
             <span class="checkmark">Contingency</span>
         </label>
         <p> </p>
@@ -343,7 +343,7 @@ for (let value of Object.values(docData_complete.relations)) {
 // console.log(differences);
 
 
-function myFunction2(id) {
+function checked(id) {
     // console.log(id);
     // console.log(document.getElementById(id).nextElementSibling.textContent);
     // id = "contingency";
