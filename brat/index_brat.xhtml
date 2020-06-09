@@ -123,36 +123,10 @@ h1 {
     </div>
 
 <!--Script Part-->
-<script type="text/javascript" src="js/head.js"></script>
-<script type="text/javascript" src="/Users/apple/brat-v1.3_Crunchy_Frog/client/lib/head.load.min.js"></script>
-<script type="text/javascript" src="/js/jquery-1.2.6.min.js"></script>
-<script type="text/javascript" src="/js/jquery-ui-personalized-1.5.2.packed.js"></script>
-<script type="text/javascript" src="/js/sprinkle.js"></script>
-<script type="text/javascript" src="/js/node.js"></script>
-<script type="text/javascript" src="converted-2.json"></script>
-<script type="javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script type="javascript" src="https://cdn.jsdelivr.net/npm/deep-diff@1/dist/deep-diff.min.js"></script>
-<script type="text/javascript">
+<script type="javascript" src="/Users/apple/ba_visualization/brat/brat-v1.3_Crunchy_Frog/client/lib/head.load.min.js"></script>
+<script type="javascript">
 
-
-var requirejs = require('requirejs');
-
-requirejs.config({
-    //Pass the top-level main.js/index.js require
-    //function to requirejs so that node modules
-    //are loaded relative to the top-level JS file.
-    nodeRequire: require
-});
-
-requirejs(['foo', 'bar'],
-function   (foo,   bar) {
-    //foo and bar are loaded according to requirejs
-    //config, but if not found, then node's require
-    //is used to load the module.
-});
-
-var bratLocation = '/Users/apple/brat-v1.3_Crunchy_Frog';
-var merge = require('lodash.merge');
+var bratLocation = '/Users/apple/ba_visualization/brat/brat-v1.3_Crunchy_Frog';
 
 head.js(
     // External libraries
