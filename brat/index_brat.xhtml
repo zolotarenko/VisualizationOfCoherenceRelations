@@ -81,7 +81,7 @@ h1 {
       <h2>Types</h2>
         <label>
             <!--<script type="javascript"> document.getElementById("one").innerHTML = types[0]; </script>-->
-            <input id="explicit" class="container" type="checkbox" onclick="checked(this.parentNode.id)"> </input>
+            <input id="explicit" class="container" type="checkbox" onclick="check_it(this.parentNode.id)"> </input>
             <span class="checkmark">Explicit</span>
         </label>
         <p> </p>
@@ -93,24 +93,24 @@ h1 {
         <h2>Senses</h2>
         <label>
             <!--<script type="javascript"> document.getElementById("temporal").innerHTML = senses[0]; </script>-->
-            <input id="temporal" class="container" type="checkbox"> </input>
+            <input id="temporal" class="container" type="checkbox" onclick="check_it(id)"> </input>
             <span class="checkmark">Temporal</span>
 
         </label>
         <p> </p>
         <label>
-            <input id="contingency" class="container" type="checkbox" onclick="checked(id)"> </input>
+            <input id="contingency" class="container" type="checkbox" onclick="check_it(id)"> </input>
             <span class="checkmark">Contingency</span>
         </label>
         <p> </p>
         <label>
-            <input id="comparison" class="container" type="checkbox"> </input>
+            <input id="comparison" class="container" type="checkbox" onclick="check_it(id)"> </input>
             <span class="checkmark">Comparison</span>
 
         </label>
         <p> </p>
         <label>
-            <input id="expansion" class="container" type="checkbox"> </input>
+            <input id="expansion" class="container" type="checkbox" onclick="check_it(id)"> </input>
             <span class="checkmark">Expansion</span>
         </label>
 
@@ -135,7 +135,24 @@ h1 {
 <script type="text/javascript">
 
 
+var requirejs = require('requirejs');
+
+requirejs.config({
+    //Pass the top-level main.js/index.js require
+    //function to requirejs so that node modules
+    //are loaded relative to the top-level JS file.
+    nodeRequire: require
+});
+
+requirejs(['foo', 'bar'],
+function   (foo,   bar) {
+    //foo and bar are loaded according to requirejs
+    //config, but if not found, then node's require
+    //is used to load the module.
+});
+
 var bratLocation = '/Users/apple/brat-v1.3_Crunchy_Frog';
+var merge = require('lodash.merge');
 
 head.js(
     // External libraries
@@ -161,18 +178,18 @@ var webFontURLs = [
     bratLocation + '/static/fonts/Liberation_Sans-Regular.ttf'
 ];
 
-head.ready(function() {
-    Util.embed(
-        // id of the div element where brat should embed the visualisations
-        'anno',
-        // object containing collection data
-        collData,
-        // object containing document data
-        docData,
-        // Array containing locations of the visualisation fonts
-        webFontURLs
-        );
-});
+// head.ready(function() {
+//     Util.embed(
+//         // id of the div element where brat should embed the visualisations
+//         'anno',
+//         // object containing collection data
+//         collData,
+//         // object containing document data
+//         docData,
+//         // Array containing locations of the visualisation fonts
+//         webFontURLs
+//         );
+// });
 
 // Stable, doesn't need to be changed from outside
 var collData = {
@@ -242,8 +259,9 @@ var pdtb_types = {used: ["Explicit", "Implicit"], unused: ["AltLex", "EntRel", "
 //     "relations" : relations};
 var docData_complete = {"text": "Es d\u00fcrfte derzeit schwer zu vermitteln sein , weshalb ein Ressort pauschal von k\u00fcnftigen Einsparungen ausgenommen werden soll auf Kosten der anderen . Reiches Ministerkollegen werden mit Argusaugen dar\u00fcber wachen , dass das Konzept wasserdicht ist . Tats\u00e4chlich gibt es noch etliche offene Fragen . So ist etwa unklar , wer Abfindungen erhalten soll , oder was passiert , wenn zu wenig Lehrer die Angebote des vorzeitigen Ausstiegs nutzen . Dennoch gibt es zu Reiches Personalpapier eigentlich keine Alternative . Das Land hat k\u00fcnftig zu wenig Arbeit f\u00fcr zu viele P\u00e4dagogen . Und die Zeit dr\u00e4ngt . Der gro\u00dfe Einbruch der Sch\u00fclerzahlen an den weiterf\u00fchrenden Schulen beginnt bereits im Herbst 2003 . Die Regierung muss sich entscheiden , und zwar schnell . Entweder sparen um jeden Preis oder Priorit\u00e4t f\u00fcr die Bildung .", "entities": [["E1", "Arg1", [[439, 440]]], ["E2", "Arg2", [[357, 438]]], ["E3", "Connective", [[352, 356]]], ["E4", "Arg1", [[439, 440]]], ["E5", "Arg2", [[377, 438]]], ["E6", "Connective", [[372, 376]]], ["E7", "Arg1", [[299, 440]]], ["E8", "Arg2", [[449, 513]]], ["E9", "Connective", [[441, 448]]], ["E10", "Arg1", [[441, 513]]], ["E11", "Arg2", [[580, 597]]], ["E12", "Connective", [[576, 579]]], ["E13", "Arg1", [[765, 786]]], ["E14", "Arg2", [[792, 819]]], ["E15", "Connective", [[756, 764], [787, 791]]], ["E16", "Arg1", [[0, 150]]], ["E17", "Arg2", [[151, 249]]], ["E18", "Arg1", [[151, 249]]], ["E19", "Arg2", [[250, 298]]], ["E20", "Arg1", [[250, 298]]], ["E21", "Arg2", [[299, 440]]], ["E22", "Arg1", [[441, 513]]], ["E23", "Arg2", [[514, 575]]], ["E24", "Arg1", [[514, 575]]], ["E25", "Arg2", [[576, 597]]], ["E26", "Arg1", [[576, 597]]], ["E27", "Arg2", [[598, 698]]], ["E28", "Arg1", [[598, 698]]], ["E29", "Arg2", [[699, 755]]], ["E30", "Arg1", [[699, 755]]], ["E31", "Arg2", [[756, 819]]]], "relations": [["R1", "Expansion.Disjunction", [["1", "E1"], ["2", "E2"]]], ["R2", "Contingency.Condition.Arg2-as-cond", [["2", "E4"], ["3", "E5"]]], ["R3", "Comparison.Concession.Arg2-as-denier", [["3", "E7"], ["4", "E8"]]], ["R4", "Expansion.Conjunction", [["4", "E10"], ["5", "E11"]]], ["R5", "Expansion.Disjunction", [["5", "E13"], ["6", "E14"]]], ["R6", "Contingency.Cause.Reason", [["6", "E16"], ["7", "E17"]]], ["R7", "Contingency.Cause.Result", [["7", "E18"], ["8", "E19"]]], ["R8", "Contingency.Cause.Reason", [["8", "E20"], ["9", "E21"]]], ["R9", "Contingency.Cause.Reason", [["9", "E22"], ["10", "E23"]]], ["R10", "Expansion.Level-of-detail.Arg2-as-detail", [["10", "E24"], ["11", "E25"]]], ["R11", "Contingency.Cause.Reason", [["11", "E26"], ["12", "E27"]]], ["R12", "Contingency.Cause.Result", [["12", "E28"], ["13", "E29"]]], ["R13", "Expansion.Conjunction", [["13", "E30"], ["14", "E31"]]]]};
 var docData = {"text": "Es d\u00fcrfte derzeit schwer zu vermitteln sein , weshalb ein Ressort pauschal von k\u00fcnftigen Einsparungen ausgenommen werden soll auf Kosten der anderen . Reiches Ministerkollegen werden mit Argusaugen dar\u00fcber wachen , dass das Konzept wasserdicht ist . Tats\u00e4chlich gibt es noch etliche offene Fragen . So ist etwa unklar , wer Abfindungen erhalten soll , oder was passiert , wenn zu wenig Lehrer die Angebote des vorzeitigen Ausstiegs nutzen . Dennoch gibt es zu Reiches Personalpapier eigentlich keine Alternative . Das Land hat k\u00fcnftig zu wenig Arbeit f\u00fcr zu viele P\u00e4dagogen . Und die Zeit dr\u00e4ngt . Der gro\u00dfe Einbruch der Sch\u00fclerzahlen an den weiterf\u00fchrenden Schulen beginnt bereits im Herbst 2003 . Die Regierung muss sich entscheiden , und zwar schnell . Entweder sparen um jeden Preis oder Priorit\u00e4t f\u00fcr die Bildung .", "entities": [], "relations" : []};
+var text = {"text": "Es d\u00fcrfte derzeit schwer zu vermitteln sein , weshalb ein Ressort pauschal von k\u00fcnftigen Einsparungen ausgenommen werden soll auf Kosten der anderen . Reiches Ministerkollegen werden mit Argusaugen dar\u00fcber wachen , dass das Konzept wasserdicht ist . Tats\u00e4chlich gibt es noch etliche offene Fragen . So ist etwa unklar , wer Abfindungen erhalten soll , oder was passiert , wenn zu wenig Lehrer die Angebote des vorzeitigen Ausstiegs nutzen . Dennoch gibt es zu Reiches Personalpapier eigentlich keine Alternative . Das Land hat k\u00fcnftig zu wenig Arbeit f\u00fcr zu viele P\u00e4dagogen . Und die Zeit dr\u00e4ngt . Der gro\u00dfe Einbruch der Sch\u00fclerzahlen an den weiterf\u00fchrenden Schulen beginnt bereits im Herbst 2003 . Die Regierung muss sich entscheiden , und zwar schnell . Entweder sparen um jeden Preis oder Priorit\u00e4t f\u00fcr die Bildung ."};
+// VARIANTS TO LOAD J
 
-// VARIANTS TO LOAD JSON
 ///////////////////////////////////////////////////
 //  $.getJSON('http://localhost:8000/PhdPlayground/pypeline/converted.json', function(response) {
 //     docData = response;
@@ -291,10 +309,9 @@ for (let key of Object.keys(pdtb_senses)) {
 
 // Part of chechboxes
 ///////////////////////////////////////////////////
-var current_check = {"relations" : [], "entities" : []};
 
 function pick_current_check(id){
-
+var current_check = {"relations" : [], "entities" : []};
 var counter = 0;
 for (let value of Object.values(docData_complete.relations)) {
   if (value !== undefined) {
@@ -302,82 +319,145 @@ for (let value of Object.values(docData_complete.relations)) {
       // console.log(sense);
       var label = document.getElementById(id).nextElementSibling.textContent.replace(/\s/g, '');
       // var label = document.getElementById(id).textContent.replace(/\s/g, '');
-      console.log(label);
+      // console.log(label);
 
-      // If sense NOT checked
+      // If sense is check_it
       if (sense === label) {
           // console.log(label, sense);
 
           // Get relation deleted : "R1"..."RN"
           var relation_sense_number = Object.values(docData_complete.relations[counter])[0];
-          var args = [];
-          //
-          //Get the needed relation that needes to be
+
+          //Get the needed relation
           if (docData_complete.relations[counter].indexOf(relation_sense_number) >= 0) {
-              //             // console.log(value);
+
               const index = docData_complete.relations.indexOf(value);
 
               // Get entities for selected sense relation
               for (let arg of docData_complete.relations[index][2]) {
                   for (let value of Object.values(docData_complete.entities)) {
                       if (arg[1] === value[0]) {
-                          console.log(value);
+                          // console.log(value);
                           // Push entity for the selected sense
-                          current_check.entities.push(value)
-                          // docData.entities.push(value);
+                          if (current_check.entities.includes(value) === false) {
+                            current_check.entities.push(value)
+
+                          }
                       }
                   }
               }
-              // Push relation of selected sense
-              // docData.relations.push(docData_complete.relations[index]);
-              current_check.relations.push(docData_complete.relations[index]);
+              // Get relation of selected sense
+             if (current_check.relations.includes(docData_complete.relations[index]) === false) {
+                    current_check.relations.push(docData_complete.relations[index]);
+                      }
           }
 
           counter += 1
       }
   }
-}}
+} return current_check}
 
 // var diff = require('deep-diff');
 // var differences = diff(docData, docData_complete);
 // console.log(differences);
 
 
-function checked(id) {
-    // console.log(id);
-    // console.log(document.getElementById(id).nextElementSibling.textContent);
-    // id = "contingency";
-  //   console.log(id);
-  //   var checkBox = document.getElementById(id);
-  //   //   console.log(checkBox);
-  //   console.log((checkBox.checked === true));
-  //   if (checkBox.checked === true) {
-  //     pick_current_check();
-  //     location.reload();
-  //
-  // // } else {
-  // //    checkBox.style.display = "blocked";
-  // // }
+// function check_it(id) {
+//     // console.log(id);
+//     // console.log(document.getElementById(id).nextElementSibling.textContent);
+//     // id = "contingency";
+//   //   console.log(id);
+//   //   var checkBox = document.getElementById(id);
+//   //   //   console.log(checkBox);
+//   //   console.log((checkBox.check_it === true));
+//   //   if (checkBox.check_it === true) {
+//   //     pick_current_check();
+//   //     location.reload();
+//   //
+//   // // } else {
+//   // //    checkBox.style.display = "blocked";
+//   // // }
+//
+//     document.getElementById(id).onclick = function() {
+//     // access properties using this keyword
+//     if (id.checked) {
+//         pick_current_check(id);
+//         // console.log(current_check);
+//         // docData = $.extend({}, docData, current_check);
+//         // docData = Object.assign({}, docData, current_check);
+//         docData = current_check;
+//         console.log(docData);
+//         Util.embed(
+//         // id of the div element where brat should embed the visualisations
+//         'anno',
+//         // object containing collection data
+//         collData,
+//         // object containing document data
+//         docData,
+//         // Array containing locations of the visualisation fonts
+//         webFontURLs
+//         );
+//         // location.reload();
+//         // $("#anno").load("#anno > *");
+//
+//     // }
+//     // else{
+//     //     alert('Checkbox has been unticked!');
+//     // }
+//     // else {
+//     //     // location.reload();
+//     //     $("#anno").load("#anno > *");
+//     // }
+//
+// }}
 
-    document.getElementById(id).onclick = function() {
-    // access properties using this keyword
-    if (this.checked) {
-        pick_current_check(id);
-        // console.log(current_check);
-        docData = $.extend({}, docData, current_check);
-        console.log(docData);
-        // location.reload();
-        $("#anno").load("#anno > *");
+function extend(obj, src) {
+    Object.keys(src).forEach(function(key) { obj[key] = src[key]; });
+    return obj;
+}
 
-    }
-    // else {
-    //     // location.reload();
-    //     $("#anno").load("#anno > *");
-    // }
+function check_it(id) {
+  // Get the checkbox
+  var checkBox = document.getElementById(id);
+  // var stack = {};
 
-}}
+    if (checkBox.checked === true) {
+        // alert(id + " checked");
+        // stack = extend(pick_current_check(id), stack);
+        docData = extend(pick_current_check(id), text);
 
-// console.log(pick_current_check());
+
+        Util.embed(
+        // id of the div element where brat should embed the visualisations
+        'anno',
+        // object containing collection data
+        collData,
+        // object containing document data
+        docData,
+        // Array containing locations of the visualisation fonts
+        webFontURLs
+        );
+
+    } else {
+    docData.relations = docData.relations.filter(n => !pick_current_check(id).relations.includes(n));
+    docData.entities = docData.entities.filter(n => !pick_current_check(id).entities.includes(n));
+
+    // Util.embed(
+    // // id of the div element where brat should embed the visualisations
+    // 'anno',
+    // // object containing collection data
+    // collData,
+    // // object containing document data
+    // docData,
+    // // Array containing locations of the visualisation fonts
+    // webFontURLs
+    // );
+
+
+  }
+    console.log(docData);
+
+}
 
 // var counter = 0;
 // for (let value of Object.values(docData_complete.relations)) {
@@ -387,7 +467,7 @@ function checked(id) {
 //         var label = document.getElementById("expansion").textContent.replace(/\s/g, '');
 //         // console.log(label);
 //
-//         // If sense NOT checked
+//         // If sense NOT check_it
 //         if (sense === label) {
 //             // console.log(label, sense);
 //

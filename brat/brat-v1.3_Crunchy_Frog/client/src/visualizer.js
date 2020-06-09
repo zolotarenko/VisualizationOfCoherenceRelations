@@ -3101,7 +3101,7 @@ Util.profileStart('before render');
         WebFont.load(webFontConfig);
         setTimeout(function() {
           if (!Visualizer.areFontsLoaded) {
-            console.error('Timeout in loading fonts');
+            // console.error('Timeout in loading fonts');
             proceedWithFonts();
           }
         }, fontLoadTimeout);
