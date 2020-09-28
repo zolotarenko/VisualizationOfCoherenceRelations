@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>German Discourse Parsing Demo</title>
+
+    <!-- Bootstrap core CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <!-- Custom styles for this template -->
+    <link href="form-validation.css" rel="stylesheet">
+
+    <style type="text/css">
+    .custom {
+	font-family: sans-serif;
+	color: black;
+	font-size:20px;
+    }
+
+    span:before {
+          content: '[';
+          font-size:30px;
+          color:steelblue;
+      }
+
+      span:after {
+          content: ']';
+          font-size:30px;
+          color:steelblue;
+
+      }
+    </style>
+
+  </head>
+  <body class="custom" background="19742.jpg">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 order-md-1 border-bottom">
+            <h4 class="mb-3">ANNIS-style brakets visualization</h4>
+          <div class="outputtext" id="outputtext"></div>
+          Schulbuchverlage beklagen Umsatzeinbrüche .
+            <span style="color:indianred">Trommeln gehört halt zum Geschäft.</span><sub>ARG1_R1</sub>
+                <span>
+                  <span style="color:black">Doch</span><sub>CONN_R1</sub>
+                  <span style="color:cornflowerblue">unterm Strich stehen Brandenburgs Schulen ganz gut da.</span><sub>ARG2_R1</sub>
+                </span><sub>ARG1_R3</sub>
+                <span>
+                  <span style="color:black">Zum einen</span><sub>CONN_R2</sub>
+                  <span style="color:indianred">wurden nach der Wende fast alle Schulbuchbestände ausgetauscht</span><sub>ARG1_R2</sub>
+                  <span style="color:black">zum anderen</span><sub>CONN_R2</sub><sub>CONN_R3</sub>
+                  <span style="color:cornflowerblue">müssen sich märkische Eltern am Buchkauf beteiligen.</span><sub>ARG2_R2</sub>
+                </span><sub>ARG2_R3</sub>
+        </div>
+      </div>
+    </div>
+</body>
+</html>

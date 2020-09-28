@@ -1,0 +1,216 @@
+body {
+    background-color: transparent;
+    min-height: 100vh;
+}
+
+/* Heading */
+h1 {
+    text-align: center;
+    /*font-family: 'Playfair Display', serif;*/
+    font-family: 'Droid Serif', serif;
+    font-weight: 900;
+    font-size: 30px ;
+    text-transform: uppercase;
+    /*display: inline-block;*/
+    /*line-height: 72px;*/
+    /*margin-bottom: 20px;*/
+    /*border-bottom: 1px solid #ddd;*/
+    color: #2f2f2f;
+
+}
+h2 {
+    text-align: left;
+    /*grid-area: t;*/
+    font-size: 24px;
+    /*text-transform: uppercase;*/
+    /*margin: 0;*/
+    font-family: 'Droid Serif', serif;
+    background: white;
+    color: #2f2f2f;
+}
+
+
+/* Render the checkboxes and text */
+.wrapper {
+    overflow: auto;
+    width: 90%;
+}
+
+label {
+    font-size: 16px;
+    font-family: 'Playfair Display', serif;
+
+}
+
+/* Checkboxes */
+.box1 {
+    background-color: transparent;
+    font-size: 16px;
+    color: black;
+    padding: 20px;
+    margin: 20px;
+    float: left;
+    /*width: 10%;*/
+    font-family: 'Droid Serif', serif;
+    border: 3px double #2f2f2f;
+
+}
+/* Annotation */
+.box2 {
+    background-color: transparent;
+    overflow: auto;
+    /*position: static;*/
+    /*color: black;*/
+    /*float: right;*/
+    padding: 40px;
+    font-family: 'Work Sans', sans-serif;
+    /*border: 3px double #2f2f2f;*/
+    height:fit-content;
+}
+
+/* Title box*/
+.box3 {
+    background-color: transparent;
+    /*overflow: hidden;*/
+    /*position: absolute;*/
+    /*color: black;*/
+    /*float: right;*/
+    padding: 40px;
+    margin: 5px;
+    font-family: 'Droid Serif', serif;
+    border-bottom: 1px solid #ddd;
+    /*border: 3px double #2f2f2f;*/
+    /*position: absolute;*/
+    top: 0;
+    width: 100%;
+    height:fit-content;
+
+}
+
+/* Center the loader */
+#loader {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 1;
+  width: 100px;
+  height: 100px;
+  margin: -75px 0 0 -75px;
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #2f2f2f;
+  -webkit-animation: spin 0.5s linear infinite;
+  animation: spin 0.5s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+#menu {
+    float: right;
+    margin: 0 100px 0 0;
+}
+#menu li { display: inline; list-style: none; }
+#menu li a { float: left;
+    margin: 0 0 0 20px;
+    color: #000000;
+}
+#menu li a:hover {
+    color: #555; }
+
+.col{
+    width: 100%;
+    border-top: 1px solid #ddd;
+    padding: 20px;
+    margin: 10px;
+    float: left;
+    height: fit-content;
+    font-size: .9em; }
+	.col.last { margin-right: 0; }
+
+#footer{
+    clear: both;
+    position:absolute;
+    padding: 10px;
+    margin: 5px;
+    font-size: 10px;
+    height: fit-content;
+    bottom: 0;}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transition: opacity 500ms;
+    visibility: hidden;
+    opacity: 0;
+    backdrop-filter: blur(6px);
+}
+
+.overlay:target {
+  visibility: visible;
+  opacity: 1;
+}
+
+.popup {
+  margin: 70px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 5px;
+  width: 70%;
+  position: relative;
+  transition: all 5s ease-in-out;
+}
+
+.popup h2 {
+  margin-top: 0;
+  color: #333;
+  font-family: Tahoma, Arial, sans-serif;
+}
+.popup .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  transition: all 200ms;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+.popup .close:hover {
+  color: #ddd;
+}
+.popup .content {
+  max-height: 30%;
+  overflow: auto;
+}
+
+@media screen and (max-width: 700px){
+  .box{
+    width: 90%;
+  }
+  .popup{
+    width: 90%;
+  }
+}
+
+@font-face {
+            font-family: 'CC-ICONS';
+            font-style: normal;
+            font-weight: normal;
+            src: url('http://mirrors.creativecommons.org/presskit/cc-icons.ttf') format('truetype');}
+
+            span.cc {
+            font-family: 'CC-ICONS';
+            font-size: 20px;
+            color: #000000;
+            }
