@@ -6,24 +6,16 @@ body {
 /* Heading */
 h1 {
     text-align: center;
-    /*font-family: 'Playfair Display', serif;*/
     font-family: 'Droid Serif', serif;
     font-weight: 900;
     font-size: 30px ;
     text-transform: uppercase;
-    /*display: inline-block;*/
-    /*line-height: 72px;*/
-    /*margin-bottom: 20px;*/
-    /*border-bottom: 1px solid #ddd;*/
     color: #2f2f2f;
 
 }
 h2 {
     text-align: left;
-    /*grid-area: t;*/
     font-size: 24px;
-    /*text-transform: uppercase;*/
-    /*margin: 0;*/
     font-family: 'Droid Serif', serif;
     background: white;
     color: #2f2f2f;
@@ -50,7 +42,6 @@ label {
     padding: 20px;
     margin: 20px;
     float: left;
-    /*width: 10%;*/
     font-family: 'Droid Serif', serif;
     border: 3px double #2f2f2f;
 
@@ -59,28 +50,18 @@ label {
 .box2 {
     background-color: transparent;
     overflow: auto;
-    /*position: static;*/
-    /*color: black;*/
-    /*float: right;*/
     padding: 40px;
     font-family: 'Work Sans', sans-serif;
-    /*border: 3px double #2f2f2f;*/
     height:fit-content;
 }
 
 /* Title box*/
 .box3 {
     background-color: transparent;
-    /*overflow: hidden;*/
-    /*position: absolute;*/
-    /*color: black;*/
-    /*float: right;*/
     padding: 40px;
     margin: 5px;
     font-family: 'Droid Serif', serif;
     border-bottom: 1px solid #ddd;
-    /*border: 3px double #2f2f2f;*/
-    /*position: absolute;*/
     top: 0;
     width: 100%;
     height:fit-content;
@@ -204,13 +185,13 @@ label {
 }
 
 @font-face {
-            font-family: 'CC-ICONS';
-            font-style: normal;
-            font-weight: normal;
-            src: url('http://mirrors.creativecommons.org/presskit/cc-icons.ttf') format('truetype');}
+    font-family: 'CC-ICONS';
+    font-style: normal;
+    font-weight: normal;
+    src: url('http://mirrors.creativecommons.org/presskit/cc-icons.ttf') format('truetype');}
 
-            span.cc {
-            font-family: 'CC-ICONS';
-            font-size: 20px;
-            color: #000000;
-            }
+    span.cc {
+    font-family: 'CC-ICONS';
+    font-size: 20px;
+    color: #000000;
+}
