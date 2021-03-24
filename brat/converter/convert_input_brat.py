@@ -35,7 +35,6 @@ from pathlib import Path
 
 
 def convert(textinput, jsoninput):
-    
     docData = OrderedDict()
 
     textinput_oneline = re.sub('\..*', '', textinput) + '.oneline.tok'
@@ -49,23 +48,32 @@ def convert(textinput, jsoninput):
 
     docData["entities"] = []
     docData["relations"] = []
-    relationsCounter_ID = 1
-    entitiesCounter_ID = 1
-    argnameCounter = 1
+    relations_counter_id = 1
+    entities_counter_id = 1
+    argname_counter = 1
 
     # Add the text to visualize
+    # WARNING (Bug 22.3.21) Not working with overlapping arguments - one span used in 2 relations
     def relation_spans():
+
         relation_pairs = []
         span_outgoing = []
         span_target = []
+
         for i in docData["entities"]:
+
+            print("Entities of the current relation:")
+            print(i)
+
             if i[1] == "Arg1":
                 span_outgoing.append(i[0])
 
             elif i[1] == "Arg2":
                 span_target.append(i[0])
 
-        # print(span_outgoing, span_target)
+        print("Outgoing and target spans:")
+        print(span_outgoing, span_target)
+
         for x, y in zip(span_outgoing, span_target):
             pair = (x, y)
             relation_pairs.append(pair)
@@ -76,43 +84,84 @@ def convert(textinput, jsoninput):
     with open(jsoninput, "r") as f:
         input_data = json.load(f)
 
+    # SECTION Build docData["entities"]
+    # First level of iteration - every relation in the CoNLL2016 JSON format
+    # E.g. ID : 1,2, ... , n
     for rel in input_data:
-        for key1, value1 in rel.items():
-            # Get the spans
-            if type(value1) == dict:
-                for key2, value2 in value1.items():
-                    if key2 == 'CharacterSpanList':
-                        # Could be: "CharacterSpanList": [[405, 457], [543, 590]] - discont
-                        # Or: [] when implicit
+        # Iterating properties of very relation : key-value pairs in the relation
+        # E.g. "ID", "DocID", "Sense" , ...
+        for rel_property_key, rel_property_value in rel.items():
+            print("rel_property_key, rel_property_value")
+            print(rel_property_key, rel_property_value)
 
-                        if value2:
-                            entity = ["E" + str(entitiesCounter_ID), key1, value2]
-                            docData["entities"] += [entity]
-                            entitiesCounter_ID += 1
+            # Arguments and connectives have dict values with needed "CharacterSpanList" in it
+            # That's why here is the second iteration:
+            # over the key-value pairs of the "Arg1", "Arg2" and "Connective"
+            if type(rel_property_value) == dict:
+                for entity_key, entity_value in rel_property_value.items():
+
+                    if entity_key == 'CharacterSpanList':
+                        # Possible values for "CharacterSpanList":
+                        # - [[300, 372]]] - normal case, simple continuous argument/connective
+                        # - [[405, 457], [543, 590]] - discontinuous argument/connective
+                        # - [] - empty argument/connective for implicit relations or
+
+                        # WARNING Fix of the bug (22.3.21):
+                        # the tested document contains empty arguments, which was filtered earlier
+                        # and was causing the wrong alignment of the relations
+                        # if entity_value:
+
+                        # Create entity and add to the docData["entities"]
+                        entity = ["E" + str(entities_counter_id), rel_property_key, entity_value]
+                        docData["entities"] += [entity]
+                        # Increase the entity counter id for entity enumeration
+                        entities_counter_id += 1
 
     # SECTION GET TYPES
     relation_type = []
+    print("Converting types...")
     for rel in input_data:
-        for key1, value1 in rel.items():
-            if key1 == "Type":
-                relation_type.append(value1)
+        for rel_property_key, rel_property_value in rel.items():
+            if rel_property_key == "Type":
+                relation_type.append(rel_property_value)
+
     # SECTION GET SENSES
+    print("Converting senses...")
     for rel in input_data:
-        for key1, value1 in rel.items():
+        for rel_property_key, rel_property_value in rel.items():
             #  Get the senses for relations
-            if key1 == "Sense":
-                # Could be a random name but lets keep it a a number
-                name = str(relation_type[relationsCounter_ID-1]) + '.' + value1
-                relation = ["R" + str(relationsCounter_ID),
-                            name, [[str(argnameCounter),
-                                    relation_spans()[argnameCounter-1][0]],
-                                   [str(argnameCounter+1),
-                                    relation_spans()[argnameCounter-1][1]]]]
+            if rel_property_key == "Sense":
+                # Could be a random name but lets keep it as a number
+                name = str(relation_type[relations_counter_id - 1]) + '.' + rel_property_value
+
+                # relation_spans = relation_spans()
+
+                print("Relation name:")
+                print(name)
+                print("Relation spans:")
+                print(relation_spans())
+
+                relation = [
+                    "R" + str(relations_counter_id),
+                    name,
+                    [
+                        [str(argname_counter),
+                         relation_spans()[argname_counter - 1][0]
+                         ],
+                        [str(argname_counter + 1),
+                         relation_spans()[argname_counter - 1][1]
+                         ]
+                    ]
+                ]
+
+                print("Relation for brat:")
+                print(relation)
+
                 # Format: ['R1', 'REL1', [['1', 'T1'], ['2', 'T2']]],
                 docData["relations"] += [relation]
 
-                relationsCounter_ID += 1
-                argnameCounter += 1
+                relations_counter_id += 1
+                argname_counter += 1
 
     # SECTION WRITE JSON
     with open(re.sub('\..*', '', jsoninput) + '.visualisation.json', "w") as f:
@@ -135,9 +184,10 @@ def main():
         # Checking if provided file is empty
         if file_to_open_path.stat().st_size != 0:
             print("Converting file {} ...".format(text_file))
-            convert(text_file,parsed_file)
+            convert(text_file, parsed_file)
         else:
             print("Your file is empty. Try passing another nonempty one and retry.")
+
 
 if __name__ == '__main__':
     main()
