@@ -8,12 +8,13 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 <link rel="stylesheet" type="text/css" href="css/style_brat.css"/>
 <link rel="stylesheet" type="text/css" href="./brat-v1.3_Crunchy_Frog/static/style-vis.css"/>
 <script type="text/javascript" src="./brat-v1.3_Crunchy_Frog/client/lib/head.load.min.js"></script>
-<script type="javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript" src="js/brat.js"></script>
+<script type="javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <title>Visualization of Coherence Relations with brat</title>
 </head>
 
-<body onload="Loader()" style="margin:0;" >
+<body onload="Loader()" style="margin:0;">
+
 <div class="box3">
 <h1>Visualization of Coherence Relations with <span style="color: #9a4d4d;">brat</span></h1>
   <ul id="menu">
@@ -71,10 +72,16 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
         </label>
     </div>
 
+    <input id="searchText"></input>
+    <button type="button" id="searchBtn" onclick="getDocText()">Try it</button>
+
+    <p id="demo"></p>
+
     <div id="loader"></div>
         <div style="display:none;" id="myDiv" class="animate-bottom">
             <div id="anno" class="box2"></div>
         </div>
+
 </div>
 <div id="footer">
     <p> &middot; <span class="cc">C</span> &middot; 2020 &middot; <em>vis-brat</em> &middot; </p>
