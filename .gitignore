@@ -1,0 +1,3 @@
+# Ignoring brat directory - too heavy for git
+brat-v1.3_Crunchy_Frog/
+node_modules/

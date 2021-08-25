@@ -191,7 +191,7 @@ label {
     src: url('http://mirrors.creativecommons.org/presskit/cc-icons.ttf') format('truetype');}
 
     span.cc {
-    font-family: 'CC-ICONS';
-    font-size: 20px;
-    color: #000000;
+        font-family: 'CC-ICONS', serif;
+        font-size: 20px;
+        color: #000000;
 }
