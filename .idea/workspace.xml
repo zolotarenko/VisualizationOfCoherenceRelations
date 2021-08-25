@@ -21,10 +21,6 @@
   <component name="ChangeListManager">
     <list default="true" id="f63efc38-4f0e-46fa-a803-18619e4d96c6" name="Default Changelist" comment="Unnecessary includes removed. Paths corrected.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/brat/css/style_brat.css" beforeDir="false" afterPath="$PROJECT_DIR$/brat/css/style_brat.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/brat/index_brat.xhtml" beforeDir="false" afterPath="$PROJECT_DIR$/brat/index_brat.xhtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/brat/js/brat.js" beforeDir="false" afterPath="$PROJECT_DIR$/brat/js/brat.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/node_modules/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -63,8 +59,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/brat/js/brat.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="335">
-              <caret line="89" column="19" lean-forward="true" selection-start-line="89" selection-start-column="19" selection-end-line="89" selection-end-column="19" />
+            <state relative-caret-position="-326">
+              <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
             </state>
           </provider>
         </entry>
@@ -198,12 +194,6 @@
               <item name="ba_visualization" type="b2602c69:ProjectViewProjectNode" />
               <item name="ba_visualization" type="462c0819:PsiDirectoryNode" />
               <item name="brat" type="462c0819:PsiDirectoryNode" />
-              <item name="brat-v1.3_Crunchy_Frog" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ba_visualization" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ba_visualization" type="462c0819:PsiDirectoryNode" />
-              <item name="brat" type="462c0819:PsiDirectoryNode" />
               <item name="css" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -330,7 +320,7 @@
       <workItem from="1627727284282" duration="4497000" />
       <workItem from="1627732578733" duration="21764000" />
       <workItem from="1629817573067" duration="751000" />
-      <workItem from="1629818390709" duration="308000" />
+      <workItem from="1629818390709" duration="770000" />
     </task>
     <task id="LOCAL-00001" summary="Changed name of the function: myFunction --&gt; checked">
       <created>1590500629527</created>
@@ -357,7 +347,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="77517000" />
+    <option name="totallyTimeSpent" value="77979000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -370,7 +360,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="47" y="25" width="1393" height="875" extended-state="1" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18430792" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -386,8 +375,8 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Run Dashboard" order="9" />
       <window_info anchor="bottom" id="Database Changes" order="10" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.48704663" visible="true" weight="0.2387268" />
-      <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.51295334" side_tool="true" visible="true" weight="0.2387268" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.48704663" visible="true" weight="0.5159151" />
+      <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.51295334" side_tool="true" visible="true" weight="0.5159151" />
       <window_info anchor="bottom" id="Python Console" order="13" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -668,10 +657,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/brat/brat-v1.3_Crunchy_Frog/CONTRIBUTORS.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/brat/js/brat.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="335">
-          <caret line="89" column="19" lean-forward="true" selection-start-line="89" selection-start-column="19" selection-end-line="89" selection-end-column="19" />
+        <state relative-caret-position="-326">
+          <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
         </state>
       </provider>
     </entry>
